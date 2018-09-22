@@ -14,21 +14,21 @@ app.use(express.static(publicPath));
 io.on('connection',(socket)=>{
   console.log('New user connected');
 
-  socket.emit('newMessage',{
-    from:'dcdeepak',
-    text:'i am deepak chawla ----deepakcodefreak'
-  });
-
-socket.on('createMessage',(message)=>{
-console.log('Message',message);
-})
-
-
+  socket.on('createMessage',(message)=>{
+    console.log('Message',message);
+    io.emit('newMessage',{
+    from:message.from,
+    message:message.text,
+    createdAt:new Date().getTime()
+  })
 });
 
-io.on('disconnect',()=>{
+
+socket.on('disconnect',()=>{
     console.log('Disconnect from client');
-  });
+});
+
+});
 
 
 server.listen(port,()=>{
