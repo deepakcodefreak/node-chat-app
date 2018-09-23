@@ -27,7 +27,7 @@ socket.broadcast.emit('newUser',generateMessage('Admin','New user joined'));
 
     io.emit('newMessage',generateMessage(message.from,message.text))
 
-    callback('This is from server');
+    callback();
 
 });
 
